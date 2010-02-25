@@ -1,0 +1,62 @@
+<style type="text/css">
+    .grid {
+        background-color: #ffffff;
+        width: 100%;
+        padding: 0.3em 0.02em 0 0.02em;
+        margin: 0 0 0.5em 0;
+        table-layout: fixed;
+    }
+    table.grid tbody tr th {
+        padding: 0.8em 0.2em 0.41em 0.3em;
+        font-size: 0.75em;
+    }
+
+    .grid * td {
+        padding: 0.41em 0.2em 0.41em 0.3em;
+        font-size: 0.85em;
+        empty-cells: show;
+        overflow: hidden;
+        width: 100%;
+        margin: 0;
+    }
+
+    .grid * td.expand {
+        white-space: nowrap;
+        overflow: hidden;
+        empty-cells: show;
+        width: 100%;
+    }
+
+    .grid * .expand * a {
+        white-space: nowrap;
+    }
+
+    .subtext {
+        white-space: nowrap;
+    }
+
+    table.grid tbody tr td.secondary {
+        font-size: 0.75em;
+    }
+    .grid * tr.gridHeader th,
+        .grid * tr.gridFooter td {
+        border-top: 1px solid #c9c9c9;
+    }
+
+    .gridHeader td {
+        padding-top: 0.5em;
+    }
+
+    .gridFooter td {
+        padding-top:4px;
+    }
+
+    tr.gridHeader th, tr.gridHeader th a {
+        color: #000000;
+    }
+
+    table.grid tbody tr.hover td, tr.hover td a, tr.selected td {
+        background: #CAE3FF;
+    }
+</style>
+
