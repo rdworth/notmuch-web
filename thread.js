@@ -58,6 +58,7 @@ function showThread (id) {
 	traverse (thread, $("#thread-view"));
 	
     	$("#inbox").hide();
+	scrollToElement ($("#thread-view")[0]);
     	$("#thread-view").show ();
 }
 

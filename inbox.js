@@ -46,6 +46,7 @@ Threads = {
 			// Add click handlers
 			$('.threadlink').click(function () {
 				console.log ("Asking me to show thread id:%s", $(this).attr("id"));
+				select_thread ($(this));
   				showThread ($(this).attr("id"));
                         }); 
                 }); 
@@ -91,6 +92,9 @@ Threads = {
 }; 
 
 $(document).ready(function(){
+
+	$("#thread-view").hide();
+	$("#inbox").show();
 
 	$("#inbox-header").hover(
   		function () {
