@@ -19,9 +19,13 @@ Threads = {
                                 Threads.threadToRow( thread, table ); 
 
 				var thread_url = "get_thread.php?id=" + thread['thread'];
-				$.getJSON( thread_url, function( jsonObj ){
-					$(".threadlink,#" + thread['thread']).data ("contents", jsonObj);
-				});
+				// What a hack to populate the right object as jsonObj does not keep track of its caller
+				thisThread = thread;
+				$.getJSON( thread_url, function (thisThread) {
+					return function (jsonObj) {
+						$("#" + thisThread['thread']).data ("contents", jsonObj);
+					}; 
+				}(thisThread));
 					
 			});
 
@@ -35,6 +39,7 @@ Threads = {
   				}
 			);
 			$('.threadlink').click(function () {
+				console.log ("Asking me to show thread id:%s", $(this).attr("id"));
   				showThread ($(this).attr("id"));
                         }); 
                 }); 
@@ -80,8 +85,14 @@ Threads = {
 }; 
 
 $(document).ready(function(){
+	$("#inbox-header").click (function () {
+    		$("#message-view").hide();
+		$("#inbox").show();
+
+        });
+
 	var url = "get_inbox.php"; 
-	Threads.threadsToTable( url, $('.container') ); 
+	Threads.threadsToTable( url, $('#inbox') ); 
 
 });
 

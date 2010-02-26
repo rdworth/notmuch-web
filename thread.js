@@ -3,6 +3,18 @@ function addMessage(message) {
     for (key in message) {
     	console.log("%s:%s", key, message[key]);
     }
+
+    
+
+    var html = "From: " + message['headers']['From'] + "<br/>";
+    html += "To: " + message['headers']['To'] + "<br/>";
+    html += "Subject: " + message['headers']['Subject'] + "<br/><br/>";
+    // TODO: handle multipart
+    html += message['body'][0]['content'] + "<br/>";
+
+    $("#inbox").hide();
+    $("#thread-view").html (html);
+    $("#thread-view").show ();
 }
 
 function traverse(o) {
@@ -21,9 +33,11 @@ function traverse(o) {
 
 
 function showThread (id) {
-	alert (id);
-	var thread = $(".threadlink,#" + id).data ("contents");
+	var thread = $("#" + id).data ("contents");
+    	console.log("SHOWING OBJECT %s:%o", id, thread);
 	traverse (thread);
+	// Save memory
+	//$(".threadlink,#" + id).data ("contents", "");
 }
 
 
