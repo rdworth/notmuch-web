@@ -1,34 +1,58 @@
 Threads = { 
         threadsToTable: function( url, $container ) { 
-                var $table = $('<table class="grid"/>'); 
+                var $table = $('<table/>');
+		var $col = $('<col style="width:22%;"/>');
+		$table.append ($col);
+		var $col = $('<col/>');
+		$table.append ($col);
+		var $col = $('<col style="width:10%;"/>');
+		$table.append ($col);
+		var $col = $('<col style="width:6%;"/>');
+		$table.append ($col);
+
                 var table = $table.attr( "border", "0" )[0]; 
-		var $col = $('<col style="width:30%;"/>');
-		$table.append ($col);
-		$col = $('<col style="width:70%;"/>');
-		$table.append ($col);
+		table.setAttribute("class", "grid");
 
 
                 $.getJSON( url, function( jsonObj ){ 
                         $.each( jsonObj, function(i, thread) { 
                                 Threads.threadToRow( thread, table ); 
                         }); 
-                        $container.append( $table ); 
                 }); 
+		$container.append( $table ); 
         }, 
         threadToRow: function( thread, table ) { 
                 var tr = document.createElement('tr'); 
                 var td = document.createElement('td'); 
                 td.appendChild(document.createTextNode( thread['authors']) ); 
+		td.setAttribute("class", "expand");
+		td.setAttribute("align", "left");
                 tr.appendChild(td); 
+
                 td = document.createElement('td'); 
+		td.setAttribute("class", "secondary expand");
+		td.setAttribute("align", "left");
                 td.appendChild(document.createTextNode( thread['subject']) ); 
                 tr.appendChild(td); 
+
+                td = document.createElement('td'); 
+		td.setAttribute("class", "secondary");
+		td.setAttribute("align", "left");
+                td.appendChild(document.createTextNode( thread['total']) ); 
+                tr.appendChild(td); 
+
+                td = document.createElement('td'); 
+		td.setAttribute("valign", "bottom");
+		td.setAttribute("align", "left");
+                td.appendChild(document.createTextNode( thread['timestamp']) ); 
+                tr.appendChild(td); 
+
                 table.appendChild(tr); 
         } 
 }; 
 
 $(document).ready(function(){
 	var url = "get_inbox.php"; 
-	Threads.threadsToTable( url, $('.inner') ); 
+	Threads.threadsToTable( url, $('.container') ); 
 });
 
