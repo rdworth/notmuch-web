@@ -8,11 +8,12 @@
 <body>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="thread.js"></script>
 <script type="text/javascript" src="inbox.js"></script>
 
 <div id="inbox-header">
-<h2>Inbox</h2>
+Inbox
 </div>
 <div id="inbox">
 </div>

@@ -1,32 +1,50 @@
-function addMessage(message) {
+function addMessage(message, container) {
     //console.log("%o", message);
     for (key in message) {
     	console.log("%s:%s", key, message[key]);
     }
 
     
-
-    var html = "From: " + message['headers']['From'] + "<br/>";
-    html += "To: " + message['headers']['To'] + "<br/>";
-    html += "Subject: " + message['headers']['Subject'] + "<br/><br/>";
+    var div = document.createElement('div');
+    div.setAttribute("id", message['id']);
+    
+    div.appendChild (document.createTextNode ( message['headers']['From'] ));
+    var br = document.createElement('br');
+    div.appendChild (br);
+    div.appendChild (document.createTextNode ("To: " + message['headers']['To']));
+    br = document.createElement('br');
+    div.appendChild (br);
+    div.appendChild (document.createTextNode ("Subject: " + message['headers']['Subject']));
+    br = document.createElement('br');
+    div.appendChild (br);
+    br = document.createElement('br');
+    div.appendChild (br);
     // TODO: handle multipart
-    html += message['body'][0]['content'] + "<br/>";
+    var pre = document.createElement('pre');
+    pre.appendChild (document.createTextNode (message['body'][0]['content']));
+    div.appendChild (pre);
+    br = document.createElement('br');
+    div.appendChild (br);
 
-    $("#inbox").hide();
-    $("#thread-view").html (html);
-    $("#thread-view").show ();
+    container.append (div);
+
+    // FIXME collapse read messages.
+    // Do I really need to query the server again to get tags for each message?
+    // Also, json interface is missing for search-tags
+    //if ("unread" in message['tags'])
+    //$("#"+ message['id']).hide();
+
 }
 
-function traverse(o) {
+function traverse(o, container) {
     for (i in o) {
         if (typeof(o[i])=="object") {
-		if ("id" in o[i]) {
-			// Is a message, add it
-			addMessage(o[i]);
-		} else {
-                	//going on step down in the object tree!!
-                	traverse(o[i]);
-		}
+		if ("filename" in o[i]) {
+			// Is an individual message, add it
+			addMessage(o[i], container);
+		} 
+                //going on step down in the object tree!!
+                traverse(o[i], container);
         }
    }
 }
@@ -34,10 +52,12 @@ function traverse(o) {
 
 function showThread (id) {
 	var thread = $("#" + id).data ("contents");
-    	console.log("SHOWING OBJECT %s:%o", id, thread);
-	traverse (thread);
+	traverse (thread, $("#thread-view"));
 	// Save memory
 	//$(".threadlink,#" + id).data ("contents", "");
+	
+    	$("#inbox").hide();
+    	$("#thread-view").show ();
 }
 
 

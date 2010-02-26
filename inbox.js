@@ -1,13 +1,13 @@
 Threads = { 
         threadsToTable: function( url, $container ) { 
                 var $table = $('<table/>');
-		var $col = $('<col style="width:22%;"/>');
+		var $col = $('<col style="width:30%;"/>');
 		$table.append ($col);
 		var $col = $('<col/>');
 		$table.append ($col);
 		var $col = $('<col style="width:10%;"/>');
 		$table.append ($col);
-		var $col = $('<col style="width:6%;"/>');
+		var $col = $('<col style="width:12%;"/>');
 		$table.append ($col);
 
                 var table = $table.attr( "border", "0" )[0]; 
@@ -75,7 +75,7 @@ Threads = {
                 td = document.createElement('td'); 
 		td.setAttribute("valign", "bottom");
 		td.setAttribute("align", "left");
-                td.appendChild(document.createTextNode( thread['timestamp']) ); 
+                td.appendChild(document.createTextNode( showLocalDate (thread['timestamp'])) ); 
                 tr.appendChild(td); 
 
 
@@ -85,6 +85,15 @@ Threads = {
 }; 
 
 $(document).ready(function(){
+
+	$("#inbox-header").hover(
+  		function () {
+    			$(this).addClass("hover");
+  		},
+  		function () {
+    			$(this).removeClass("hover");
+  		}
+	);
 	$("#inbox-header").click (function () {
     		$("#message-view").hide();
 		$("#inbox").show();
