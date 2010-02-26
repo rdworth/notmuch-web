@@ -35,7 +35,7 @@ Threads = {
   				}
 			);
 			$('.threadlink').click(function () {
-  				showMessage ($(this).attr("id"));
+  				showThread ($(this).attr("id"));
                         }); 
                 }); 
 		$container.append( $table ); 
