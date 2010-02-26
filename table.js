@@ -17,12 +17,30 @@ Threads = {
                 $.getJSON( url, function( jsonObj ){ 
                         $.each( jsonObj, function(i, thread) { 
                                 Threads.threadToRow( thread, table ); 
+			});
+			$("td").hover(
+  				function () {
+    					$(this).addClass("hover");
+  				},
+  				function () {
+    					$(this).removeClass("hover");
+  				}
+			);
+			$('.threadlink').click(function () {
+  				alert ('hola');
                         }); 
                 }); 
 		$container.append( $table ); 
+
+		$('tr').click(function () {
+  			alert ('hola');
+		});
+
         }, 
         threadToRow: function( thread, table ) { 
                 var tr = document.createElement('tr'); 
+		tr.setAttribute("class", "threadlink");
+		tr.setAttribute("id", thread['thread']);
                 var td = document.createElement('td'); 
                 td.appendChild(document.createTextNode( thread['authors']) ); 
 		td.setAttribute("class", "expand");
@@ -47,12 +65,17 @@ Threads = {
                 td.appendChild(document.createTextNode( thread['timestamp']) ); 
                 tr.appendChild(td); 
 
+
                 table.appendChild(tr); 
+
         } 
 }; 
 
 $(document).ready(function(){
 	var url = "get_inbox.php"; 
 	Threads.threadsToTable( url, $('.container') ); 
+
 });
+
+
 
