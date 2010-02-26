@@ -11,7 +11,6 @@
 <script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="thread.js"></script>
 <script type="text/javascript" src="inbox.js"></script>
-
 <div id="inbox-header">
 Inbox
 </div>

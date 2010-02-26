@@ -7,6 +7,7 @@ function addMessage(message, container) {
     
     var div = document.createElement('div');
     div.setAttribute("id", message['id']);
+    div.setAttribute("class", 'thread-div');
     
     div.appendChild (document.createTextNode ( message['headers']['From'] ));
     var br = document.createElement('br');
@@ -51,10 +52,10 @@ function traverse(o, container) {
 
 
 function showThread (id) {
+	$(".thread-div").remove();
+
 	var thread = $("#" + id).data ("contents");
 	traverse (thread, $("#thread-view"));
-	// Save memory
-	//$(".threadlink,#" + id).data ("contents", "");
 	
     	$("#inbox").hide();
     	$("#thread-view").show ();
