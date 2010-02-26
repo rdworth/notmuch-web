@@ -17,8 +17,16 @@ Threads = {
                 $.getJSON( url, function( jsonObj ){ 
                         $.each( jsonObj, function(i, thread) { 
                                 Threads.threadToRow( thread, table ); 
+
+				var thread_url = "get_thread.php?id=" + thread['thread'];
+				$.getJSON( thread_url, function( jsonObj ){
+					$(".threadlink,#" + thread['thread']).data ("contents", jsonObj);
+				});
+					
 			});
-			$("td").hover(
+
+
+			$(".threadlink").hover(
   				function () {
     					$(this).addClass("hover");
   				},
@@ -27,7 +35,7 @@ Threads = {
   				}
 			);
 			$('.threadlink').click(function () {
-  				alert ('hola');
+  				showMessage ($(this).attr("id"));
                         }); 
                 }); 
 		$container.append( $table ); 

@@ -8,6 +8,7 @@
 <body>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="message.js"></script>
 <script type="text/javascript" src="table.js"></script>
 
 <h2>Inbox</h2>
