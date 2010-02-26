@@ -1,6 +1,6 @@
 * Inbox Keyboard navitation 
 * Inbox hovering with colors 
-* show thread down the inbox, without hiding it
+* show thread contents below the inbox, without hiding it
 * Show tags, hide unread (need changes to notmuch?)
 * Actions! (reply, compose, tag, search)
 * If thread is not yet loaded, kill other requests for threads and launch a new one

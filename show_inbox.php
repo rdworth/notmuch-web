@@ -19,5 +19,8 @@ Inbox
 </div>
 <div id="thread-view">
 </div>
+<div id="compose-view">
+Here should be a nice email composer form
+</div>
 </body>
 </html> 

@@ -10,7 +10,7 @@ function select_thread (current) {
 function handle_key (e) {
 	// Ugly optimization
 	if (e.which != 110 && e.which != 112 && e.which != 13 && e.which != 111 &&
-            e.which != 113)
+            e.which != 113 && e.which != 78 && e.which != 80 && e.which != 109)
 		return;
 
 	var current_id = $("#thread-view").data("current");
@@ -53,6 +53,12 @@ function handle_key (e) {
 				select_thread (current);
 				scrollToElement (current[0]);
 			}
+			break;
+		// 'm'
+		case 109:
+        		$("#thread-view").hide();
+        		$("#inbox").hide();
+        		$("#compose-view").show();
 			break;
 	}
 

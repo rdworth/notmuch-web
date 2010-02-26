@@ -94,6 +94,7 @@ Threads = {
 $(document).ready(function(){
 
 	$("#thread-view").hide();
+	$("#compose-view").hide();
 	$("#inbox").show();
 
 	$("#inbox-header").hover(
