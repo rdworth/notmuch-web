@@ -38,6 +38,12 @@ Threads = {
     					$(this).removeClass("hover");
   				}
 			);
+			// Select first element in the list
+			var current = $(".threadlink:first");
+			current.addClass ("highlight");
+			$("#thread-view").data("current", current.attr("id"));
+
+			// Add click handlers
 			$('.threadlink').click(function () {
 				console.log ("Asking me to show thread id:%s", $(this).attr("id"));
   				showThread ($(this).attr("id"));
@@ -95,13 +101,50 @@ $(document).ready(function(){
   		}
 	);
 	$("#inbox-header").click (function () {
-    		$("#message-view").hide();
+    		$("#thread-view").hide();
 		$("#inbox").show();
 
         });
 
 	var url = "get_inbox.php"; 
 	Threads.threadsToTable( url, $('#inbox') ); 
+
+
+	$(document).keypress(function(e) {
+		// Optimize: enter only if key is navigation
+		if ($("#inbox").is(":visible")) {
+			var current_id = $("#thread-view").data("current");
+			if(typeof(current_id) == 'undefined' || current_id == null) {
+				current = $(".threadlink:first");
+			} else {
+				var current = $('#' + current_id);
+			}
+				
+			current.removeClass ("highlight");
+			var next = current.next();
+			var prev = current.prev();
+			switch (e.which) {
+				// 'n'
+				case 110:
+					if(typeof(next) !== 'undefined' && next != null && next.hasClass('threadlink')) {
+						current = next;
+					}
+					break;
+				// 'p'
+				case 112:
+					if(typeof(prev) !== 'undefined' && prev != null && prev.hasClass('threadlink')) {
+						current = prev;
+					}
+					break;
+				// 'enter'	
+				case 13:
+					break;
+			}
+			current.addClass ("highlight");
+			$("#thread-view").data("current", current.attr("id"));
+			console.log ("Selected thread %s", current.attr("id"));
+		}
+	});
 
 });
 
