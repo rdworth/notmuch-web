@@ -142,6 +142,8 @@ $(document).ready(function(){
 			}
 			current.addClass ("highlight");
 			$("#thread-view").data("current", current.attr("id"));
+			if (current[0].offsetHeight > 0)
+				scrollToElement (current[0]);
 			console.log ("Selected thread %s", current.attr("id"));
 		}
 	});
